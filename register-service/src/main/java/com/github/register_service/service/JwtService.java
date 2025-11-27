@@ -22,7 +22,13 @@ public class JwtService {
 
 
     public String getToken(UserDetails user) {
-        return getToken(new HashMap<>(), user);
+    Map<String, Object> claims = new HashMap<>();
+    claims.put("role", user.getAuthorities()
+            .stream()
+            .findFirst()
+            .get()
+            .getAuthority());
+        return getToken(claims, user);
     }
 
     private String getToken(Map<String, Object> extraClaims, UserDetails user) {

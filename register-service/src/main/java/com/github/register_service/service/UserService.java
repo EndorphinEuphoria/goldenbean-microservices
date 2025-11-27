@@ -13,6 +13,8 @@ import com.github.register_service.repository.UserRepository;
 import com.github.register_service.request.AuthResponse;
 import com.github.register_service.request.LoginRequest;
 import com.github.register_service.request.RegisterRequest;
+import com.github.register_service.request.RegisterResponse;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -39,7 +41,7 @@ public class UserService {
     }
 
 
-    public AuthResponse registerUser(RegisterRequest request) {
+   public RegisterResponse registerUser(RegisterRequest request) {
 
     Rol rol = rolRepository.findById(2L)
             .orElseThrow(() -> new RuntimeException("Rol no encontrado"));
@@ -51,16 +53,13 @@ public class UserService {
             .rol(rol)
             .build();
 
- 
-     userRepository.save(user);
+    userRepository.save(user);
 
-
-    return AuthResponse.builder()
-            .token(jwtService.getToken(user))
+    return RegisterResponse.builder()
+            .message("Usuario registrado correctamente")
+            .status(201).count(1)
             .build();
 }
-
-
 
 
     public void deleteUserById(Long userId){
