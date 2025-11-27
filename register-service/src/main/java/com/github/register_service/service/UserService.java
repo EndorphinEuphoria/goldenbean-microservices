@@ -14,6 +14,7 @@ import com.github.register_service.request.AuthResponse;
 import com.github.register_service.request.LoginRequest;
 import com.github.register_service.request.RegisterRequest;
 import com.github.register_service.request.RegisterResponse;
+import com.github.register_service.request.UserResponseDTO;
 
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,20 @@ public class UserService {
     public void deleteUserById(Long userId){
         userRepository.deleteById(userId);
     }
+
+
+    public UserResponseDTO getUserByUsername(String username) {
+    User user = userRepository.findByUsername(username)
+            .orElseThrow(() -> new RuntimeException("User not found"));
+
+    UserResponseDTO dto = new UserResponseDTO();
+    dto.setUsername(user.getUsername());
+    dto.setPassword(user.getPassword());
+    dto.setRole(user.getRol().getNombre()); 
+
+    return dto;
+}
+
 
     
 
