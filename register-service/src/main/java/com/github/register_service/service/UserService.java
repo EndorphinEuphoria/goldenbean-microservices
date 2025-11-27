@@ -1,8 +1,5 @@
 package com.github.register_service.service;
 
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,8 +7,6 @@ import com.github.register_service.model.Rol;
 import com.github.register_service.model.User;
 import com.github.register_service.repository.RolRepository;
 import com.github.register_service.repository.UserRepository;
-import com.github.register_service.request.AuthResponse;
-import com.github.register_service.request.LoginRequest;
 import com.github.register_service.request.RegisterRequest;
 import com.github.register_service.request.RegisterResponse;
 import com.github.register_service.request.UserResponseDTO;
@@ -28,18 +23,6 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final RolRepository rolRepository;
-    private final JwtService jwtService;
-    private final AuthenticationManager authenticationManager;
-
-    public AuthResponse login (LoginRequest request){
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword()));
-        UserDetails user = userRepository.findByUsername(request.getUsername())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-        String token = jwtService.getToken(user);
-        return AuthResponse.builder()
-                .token(token)
-                .build();
-    }
 
 
    public RegisterResponse registerUser(RegisterRequest request) {
