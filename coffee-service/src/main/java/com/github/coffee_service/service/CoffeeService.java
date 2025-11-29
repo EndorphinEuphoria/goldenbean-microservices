@@ -27,6 +27,15 @@ public class CoffeeService {
             .orElseThrow(() -> new  CoffeeNotFoundException("Coffee not found with id: " + id));
     }
 
+    public List<Coffee> getByNormalized(String name) {
+        String normalized = name.toLowerCase()
+        .trim()
+        .replaceAll("\\s+", "_")
+        .replaceAll("[^a-z0-9_áéíóúñü-]", "");
+
+        return coffeeRepository.findByNombreNormalizadoContainingIgnoreCase(normalized);
+    }
+
     public Coffee create(Coffee coffee) {
         if (coffee == null) {
             throw new RuntimeException("Coffee cannot be null");
@@ -44,10 +53,10 @@ public class CoffeeService {
             .orElseThrow(() -> new CoffeeNotFoundException("Coffee not found with id: " + id)) ;
 
         existing.setNombre(coffeeData.getNombre());
-        existing.setNombre_normalizado(coffeeData.getNombre_normalizado());
+        existing.setNombreNormalizado(coffeeData.getNombreNormalizado());
         existing.setImagen(coffeeData.getImagen());
         existing.setDescripcion(coffeeData.getDescripcion());
-        existing.setPrecio(coffeeData.getPrecio());
+        existing.setPrecioCLP(coffeeData.getPrecioCLP());
 
         return coffeeRepository.save(existing);
     }
