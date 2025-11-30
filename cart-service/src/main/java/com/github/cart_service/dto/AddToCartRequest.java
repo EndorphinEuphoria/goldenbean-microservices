@@ -1,0 +1,11 @@
+package com.github.cart_service.dto;
+
+import lombok.Data;
+
+@Data
+public class AddToCartRequest {
+    private Long coffeeId;
+    private String coffeeName;
+    private Integer priceCLP;
+    private Integer quantity = 1;
+}
