@@ -4,33 +4,29 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "rol")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Rol{ 
+@Schema(description = "Entidad que representa un rol del sistema.")
+public class Rol { 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "Identificador único del rol.", example = "1")
     private Long idRol;
 
     @Column(nullable = false, length = 20)
+    @Schema(description = "Nombre del rol.", example = "ADMIN")
     private String nombre;
 
     @OneToMany(mappedBy = "rol", cascade = CascadeType.ALL)
     @JsonIgnore
-    List<User> users;
+    @Schema(description = "Lista de usuarios asociados a este rol. No se expone en las respuestas.")
+    private List<User> users;
 }
