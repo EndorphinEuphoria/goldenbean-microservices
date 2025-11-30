@@ -33,7 +33,7 @@ public class LoadDataBase {
                 rolRepository.save(Usuario);
 
                 
-                User ADM = new User(null,"admin","admin@gmail.com","AdminUser12#",admin);
+                User ADM = new User(null,"admin@gmail.com","AdminUser12#","admin",admin);
                 
                 String encoded = passwordEncoder.encode(ADM.getPassword());  
                 ADM.setPassword(encoded);

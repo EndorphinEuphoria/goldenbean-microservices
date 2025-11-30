@@ -1,9 +1,9 @@
 package com.github.login_service.service;
 
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.github.login_service.DTO.ExternalUserDTO;
-import com.jetbrains.exported.JBRApi.Service;
 
 import lombok.RequiredArgsConstructor;
 
