@@ -1,6 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "automatic",
-    "java.project.sourcePaths": [
-        "cart-service"
-    ]
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic"
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
