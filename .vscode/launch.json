@@ -40,6 +40,16 @@
             "projectName": "login-service",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-PayApiApplication<pay-service>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.github.pay_service.PayApiApplication",
+            "projectName": "pay-service",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
